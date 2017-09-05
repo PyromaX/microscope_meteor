@@ -1,5 +1,4 @@
 Template.postSubmit.events({
-
     'submit form': function(e) {
         e.preventDefault();
 
@@ -14,13 +13,13 @@ Template.postSubmit.events({
 
         Meteor.call('postInsert', post, function(error, result) {
             // affiche l'erreur à l'utilisateur et s'interrompt
-            if (error)
+            if (error){
                 return throwError(error.reason);
-
+            }
             // affiche ce résultat mais route tout de même
-            if (result.postExists)
-                throwError('Ce lien a déja été utilisé');
-
+            if (result.postExists){
+                throwError('Ce lien a déjà été utilisé');
+            }
             Router.go('postPage', {_id: result._id});
         });
     }
